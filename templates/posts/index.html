@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %} | All Posts{% endblock %}
+{% block content %}
+    <div class="conatiner">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-1">
+                <h2>All Posts</h2>
+            </div>
+            <div class="col-md-2">
+                <a href="/posts/create" class="btn btn-primary btn-lg" style="margin-top:20px;">Create New Post</a>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="container">
+                <table class="table">
+                    <tr>
+                        <th>#</th>
+                        <th>Title</th>
+                        <th>Category</th>
+                        <th>Body</th>
+                        <th>Authors</th>
+                        <th>Created_at</th>
+                        <th></th>
+                    </tr>
+                    {% if posts %}
+                        {% for post in posts %}
+                            <tr>
+                                <td>{{ post.id }}</td>
+                                <td>{{ post.title }}</td>
+                                <td>{{ post.category }}</td>
+                                {% if post.body|wordcount > 12 %}
+                                    <td>{{ post.body|slice:":50" }}......</td>
+                                {% else %}
+                                    <td>{{ post.body }}</td>
+                                {% endif %}
+                                <td>{{ post.user }}</td>
+                                <td>{{ post.pub_date }}</td>
+                                <td><a href="/posts/{{ post.id }}" class="btn btn-default btn-xs">Show</a><a
+                                        href="/posts/{{ post.id }}/update"
+                                        class="btn btn-default btn-xs">Edit</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td><h4>No Posts</h4>
+                            <td>
+                        </tr>
+                    {% endif %}
+
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

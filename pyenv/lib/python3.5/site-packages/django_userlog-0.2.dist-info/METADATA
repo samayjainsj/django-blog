@@ -1,0 +1,29 @@
+Metadata-Version: 2.0
+Name: django-userlog
+Version: 0.2
+Summary: Logs users' recent browsing history.
+Home-page: https://github.com/aaugustin/django-userlog
+Author: Aymeric Augustin
+Author-email: aymeric.augustin@m4x.org
+License: BSD
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Django
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+
+django-userlog is a lightweight solution to see in real-time how a given user
+is browsing a Django website. The intended use case is live customer support.
+
+(Note that "synchronized browsing" is a much better solution. Modern live
+customer support solutions often provide this feature — if you can afford it!)
+

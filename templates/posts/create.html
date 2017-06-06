@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %} | Create new Post{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <form id="post_form" method="post" action="/posts/create/">
+                    {% csrf_token %}
+                    {% for hidden in form.hidden_fields %}
+                        {{ hidden }}
+                    {% endfor %}
+
+                    {% for field in form.visible_fields %}
+                        {{ field.errors }}
+                        {{ field.help_text }}
+                        {{ field }}
+                    {% endfor %}
+
+                    <input type="submit" class="btn btn-success" name="submit" value="Create Post"/>
+                    <a href="/posts/create" class="btn btn-danger">Reset</a>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

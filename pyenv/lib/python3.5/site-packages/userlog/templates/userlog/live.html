@@ -1,0 +1,53 @@
+{% extends "admin/change_list.html" %}
+{% load admin_static i18n %}
+
+{% block extrahead %}
+
+{{ block.super }}
+
+{% if token %}
+<script src="{% url 'admin:userlog_jsi18n' %}"></script>
+<script>
+(function ($) {
+    $(function () {
+        $('#result_list').userlog({
+            big_brother: {% if fieldname %}false{% else %}true{% endif %},
+            locale: '{{ LANGUAGE_CODE }}',
+            token: '{{ token }}',
+            wsuri: '{{ wsuri }}'
+        });
+    });
+})(django.jQuery)
+</script>
+{% endif %}
+
+{% endblock %}
+
+{% block breadcrumbs %}
+
+<div class="breadcrumbs">
+<a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+&rsaquo; <a href="{% url 'admin:app_list' app_label='userlog' %}">{% trans 'User logs' %}</a>
+&rsaquo; {% trans 'Live logs' %}
+</div>
+
+{% endblock %}
+
+{% block content %}
+
+{% if fieldname %}
+<form action="{% url 'admin:userlog_live' %}" method="GET">
+<label for="username">{{ fieldname|capfirst }}</label>
+<input type="text" name="username">
+<input type="submit" value="{% trans 'Search' %}">
+</form>
+{% endif %}
+
+{% if token %}
+<table id="result_list" class="module">
+<thead></thead>
+<tbody></tbody>
+</table>
+{% endif %}
+
+{% endblock %}
