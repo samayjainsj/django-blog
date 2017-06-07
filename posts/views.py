@@ -8,13 +8,13 @@ from .forms import PostForm
 from django.views.generic.edit import UpdateView
 from .models import Post, Category
 
-@is_logged_in
+
 class LoggedInMixin(object):
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(LoggedInMixin, self).dispatch(*args, **kwargs)
 
-@is_logged_in
+
 # Create your views here.
 class IndexView(LoggedInMixin, generic.ListView):
     model = Post
@@ -23,6 +23,7 @@ class IndexView(LoggedInMixin, generic.ListView):
     queryset = Post.objects.all()
 
 
+@login_required()
 # Save something in database
 def add_post(request):
     # A HTTP POST?
@@ -48,7 +49,7 @@ def add_post(request):
     # Render the form with error messages (if any).
     return render(request, 'posts/create.html', {'form': create_post_form})
 
-
+@login_required()
 def show_post(request, post_id):
     try:
         post = Post.objects.get(pk=post_id)
@@ -56,13 +57,13 @@ def show_post(request, post_id):
         raise Http404("Post does not exist")
     return render(request, 'posts/show.html', {'post': post})
 
-
+@login_required()
 def post_delete(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
     post.delete()
     return redirect(reverse('index'))
 
-
+@login_required()
 class PostUpdate(UpdateView):
     model = Post
     fields = ('title', 'slug', 'body', 'category', 'user')
